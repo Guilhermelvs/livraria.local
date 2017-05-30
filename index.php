@@ -15,7 +15,7 @@ Released   : 20081210
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Longbeach by TEMPLATED</title>
+<title>Thiago a Moral</title>
 <link href="layout/style.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 <body>
