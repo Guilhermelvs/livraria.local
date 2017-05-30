@@ -1,0 +1,26 @@
+table
+{
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+		border:1px solid #000000;
+		width:100%;
+}
+table tbody td
+{
+	border-bottom:1px solid #CCC;
+	text-align:center;
+}
+.tituloTable
+{
+	font-size:16px;
+	font-style:italic;
+}
+
+#localPrinter
+{
+	width:100%;
+	text-align:right;
+	padding:5px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:10px;
+}
