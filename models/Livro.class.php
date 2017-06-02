@@ -24,10 +24,9 @@ class Livro extends ConnectDB
         if(sizeof($columns) <= 0){
             $this->columns = array(
                 "genero_id" => NULL,
-                "editora_id" => NULL,
                 "nome" => NULL,
                 "descricao" => NULL,
-                "preco" => NULL,
+                "valor" => NULL,
             );
         } else {
             $this->columns = $columns;

@@ -5,10 +5,10 @@ require_once($path); //echo '<br>conecta ok -> '. $path;
 abstract class ConnectDB
 {
     private $typedb = 'PDO';
-    private $host = 'localhost';
-    private $user = 'root';
-    private $pass = 'vagrant';
-    private $database = 'livraria_local';
+    private $host = DB_HOST;
+    private $user = DB_USER;
+    private $pass = DB_PASS;
+    private $database = DB_NAME;
     private $conect = '';
     private $dataset = NULL;
     public $row = -1;
@@ -175,41 +175,15 @@ abstract class ConnectDB
      * @example run > SELECT FROM <table>
      */
 
-    public function selectDB($object, $type='ALL', $rquery=false)
+    public function selectDB($object, $rquery=false)
     {
-        switch ($type){
-            case 'ALL':
-                $sql = 'SELECT * FROM ' . $object->table_prefix . $object->table_name;
+        $sql = 'SELECT * FROM ' . $object->table_name;
 
                 if($object->extraSelect != NULL){
                     $sql.= ' ' . $object->extraSelect;
                 }
 
                 if($rquery == false) return $this->executeSql($sql, $this->typedb); else return $sql;
-                break;
-            case 'CUSTOM':
-                $sql = 'SELECT ';
-
-                for($i=0; $i < count($object->columns); $i++){
-                    $sql.= key($object->columns);
-
-                    if($i < (count($object->columns)-1)){
-                        $sql.= ', ';
-                    } else {
-                        $sql.= ' ';
-                    }
-
-                    next($object->columns);
-                }
-
-                $sql.= 'FROM ' . $object->table_prefix . $object->table_name;
-
-                if($object->extraSelect != NULL){
-                    $sql.= ' ' . $object->extraSelect;
-                }
-
-                if($rquery == false) return $this->executeSql($sql, $this->typedb); else return $sql;
-        }
     }
 
     /**

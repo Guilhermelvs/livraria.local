@@ -21,7 +21,7 @@
             <div class="seller-grids">
                 <?php
                     $livros = new Livro();
-                    $livros->extraSelect = ' where ' . $livros->table_name . '.genero_id = ' . $categoria->genero_id;
+                    $livros->extraSelect = ' where livros.genero_id = ' . $categoria->genero_id;
                     $livros->innerJoinDB($livros, ['genero' => 'genero_id']);
 
                     if($livros->row > 0){
@@ -30,7 +30,7 @@
                         foreach ($livros_array as $livro) {
                 ?>
                     <div class="col-md-3 seller-grid">
-                        <a href="<?php echo URL_BASE; ?>livros/livro?id=<?php echo $livro['livro_id']; ?>"><img src="<?php echo URL_IMG . '/produtos/' . $livro['livro_id']; ?>.jpg" alt=""/></a>
+                        <a href="<?php echo URL_BASE; ?>livros/livro?id=<?php echo $livro['livro_id']; ?>"><img src="<?php echo ww.jpg . '/produtos/' . $livro['livro_id']; ?>.jpg" alt=""/></a>
                         <h4><a href="<?php echo URL_BASE; ?>livros/livro?id=<?php echo $livro['livro_id']; ?>"><?php echo $livro['nome']; ?></a></h4>
                         <p>R$ <?php echo $livro['valor']; ?></p>
                     </div>

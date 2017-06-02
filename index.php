@@ -7,8 +7,8 @@
 	$prepare = explode('/', $url);
 
 	// posição da url
-	$module_pos = 1;
-	$action_pos = 2;
+	$module_pos = 2;
+	$action_pos = 3;
 
 	// validar
 	if(count($prepare) > $module_pos){
