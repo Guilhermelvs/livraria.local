@@ -4,7 +4,6 @@ require_once($path); //echo '<br>conecta ok -> '. $path;
 
 abstract class ConnectDB
 {
-    private $typedb = 'PDO';
     private $host = DB_HOST;
     private $user = DB_USER;
     private $pass = DB_PASS;
@@ -22,11 +21,7 @@ abstract class ConnectDB
     public function __construct(){ $this->Connect();}
     public function __destruct()
     {
-        if($this->typedb == 'MYSQL_CONNECT'){
-            if($this->conect != NULL){
-                mysql_close($this->conect);
-            }
-        }
+        //
     }
 
     /**
@@ -37,19 +32,10 @@ abstract class ConnectDB
 
     public function Connect()
     {
-        if($this->typedb == 'PDO'){
-            $this->conect = new PDO("mysql:host=$this->host;dbname=$this->database", $this->user, $this->pass);
-            $this->conect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->conect = new PDO("mysql:host=$this->host;dbname=$this->database", $this->user, $this->pass);
+        $this->conect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            return $this->conect;
-        } else if($this->typedb == 'MYSQL_CONNECT'){
-            $this->conect = mysql_connect($this->host, $this->user, $this->pass, true) or $this->errorManager(__FILE__, __FUNCTION__, mysql_errno(), mysql_error());
-            mysql_select_db($this->database) or $this->errorManager(__FILE__, __FUNCTION__, mysql_errno(), mysql_error());
-            mysql_query('SET NAMES "utf8"');
-            mysql_query('SET character_set_connection=utf8');
-            mysql_query('SET character_set_client=utf8');
-            mysql_query('SET character_set_results=utf8');
-        }
+        return $this->conect;
     }
 
     /**
@@ -64,7 +50,7 @@ abstract class ConnectDB
         $obj = new $object;
         $obj->selectDB($obj);
 
-        $sql = 'INSERT INTO ' . $object->table_prefix . $object->table_name . '(' . $object->columnPrimaryKey . ', ';
+        $sql = 'INSERT INTO ' . $object->table_name . '(' . $object->columnPrimaryKey . ', ';
 
         for($i = 0; $i < count($object->columns); $i++){
             $sql.= key($object->columns);
@@ -94,16 +80,7 @@ abstract class ConnectDB
             next($object->columns);
         }
 
-        if($object->table_log == true){
-            // create > zlog
-            $logSql = 'INSERT INTO ' .$object->table_prefix . 'zlog' . $object->table_name;
-            $logSql.= '(idCriador, ' . $object->columnPrimaryKey . ', tipo, codigo_sql)';
-            $logSql.= 'VALUES (' . $_SESSION['user_id'] . ', ' . ($obj->row+1) . ', "INSERT", "' . $sql . '"); ';
-
-            if($rquery == false) return $this->executeSql($sql . $logSql, $this->typedb); else return $sql . $logSql;
-        } else {
-            if($rquery == false) return $this->executeSql($sql, $this->typedb); else return $sql;
-        }
+        if($rquery == false) return $this->executeSql($sql); else return $sql;
     }
 
     /**
@@ -115,7 +92,7 @@ abstract class ConnectDB
 
     public function updateDB($object, $rquery=false)
     {
-        $sql = 'UPDATE ' . $object->table_prefix . $object->table_name . ' SET ';
+        $sql = 'UPDATE ' . $object->table_name . ' SET ';
 
         for($i = 0; $i < count($object->columns); $i++){
             $sql.= key($object->columns) . "=";
@@ -132,17 +109,7 @@ abstract class ConnectDB
         $sql.= "WHERE " . $object->columnPrimaryKey . "=";
         $sql.= is_numeric($object->valuePrimaryKey) ? $object->valuePrimaryKey : "'" . $object->valuePrimaryKey . "'; ";
 
-        if($object->table_log == true){
-            // create > zlog
-            $logSql = 'INSERT INTO ' .$object->table_prefix . 'zlog' . $object->table_name;
-            $logSql.= '(idCriador, ' . $object->columnPrimaryKey . ', tipo, codigo_sql)';
-            $logSql.= 'VALUES (' . $_SESSION['user_id'] . ', ' . $object->valuePrimaryKey . ', "UPDATE", "' . $sql . '"); ';
-
-            if($rquery == false) return $this->executeSql($sql . $logSql, $this->typedb); else return $sql . $logSql;
-        } else {
-            if($rquery == false) return $this->executeSql($sql, $this->typedb); else return $sql;
-        }
-
+        if($rquery == false) return $this->executeSql($sql); else return $sql;
     }
 
     /**
@@ -154,18 +121,11 @@ abstract class ConnectDB
 
     public function deleteDB($object, $rquery=false)
     {
-        $sql = 'DELETE FROM ' . $object->table_prefix . $object->table_name;
+        $sql = 'DELETE FROM ' . $object->table_name;
         $sql.= "WHERE " . $object->columnPrimaryKey . "=";
         $sql.= is_numeric($object->valuePrimaryKey) ? $object->valuePrimaryKey : "'" . $object->valuePrimaryKey . "'; ";
 
-        if($object->table_log == true){
-            // create > zlog
-            $logSql = 'INSERT INTO ' .$object->table_prefix . 'zlog' . $object->table_name;
-            $logSql.= '(idCriador, ' . $object->columnPrimaryKey . ', tipo, codigo_sql)';
-            $logSql.= 'VALUES (' . $_SESSION['user_id'] . ', ' . $object->valuePrimaryKey . ', "DELETE", "' . $sql . '"); ';
-        }
-
-        if($rquery == false) return $this->executeSql($sql . $logSql, $this->typedb); else return $sql . $logSql;
+        if($rquery == false) return $this->executeSql($sql); else return $sql . $logSql;
     }
 
     /**
@@ -179,11 +139,11 @@ abstract class ConnectDB
     {
         $sql = 'SELECT * FROM ' . $object->table_name;
 
-                if($object->extraSelect != NULL){
-                    $sql.= ' ' . $object->extraSelect;
-                }
+        if($object->extraSelect != NULL){
+            $sql.= ' ' . $object->extraSelect;
+        }
 
-                if($rquery == false) return $this->executeSql($sql, $this->typedb); else return $sql;
+        if($rquery == false) return $this->executeSql($sql); else return $sql;
     }
 
     /**
@@ -207,7 +167,7 @@ abstract class ConnectDB
             $sql.= ' ' . $object->extraSelect;
         }
 
-        if($rquery == false) return $this->executeSql($sql, $this->typedb); else return $sql;
+        if($rquery == false) return $this->executeSql($sql); else return $sql;
     }
 
     /**
@@ -219,39 +179,20 @@ abstract class ConnectDB
 
     public function executeSql($sql=NULL)
     {
-        if($this->typedb == 'PDO'){
-            if($sql != NULL){
-                $query_pdo = $this->Connect()->prepare($sql) or $this->errorManager(__FILE__, __FUNCTION__, NULL, 'PDO Error');
-                $query_pdo->execute();
-                $this->row = $query_pdo->rowCount();
+        if($sql != NULL){
+            $query_pdo = $this->Connect()->prepare($sql) or $this->errorManager(__FILE__, __FUNCTION__, NULL, 'PDO Error');
+            $query_pdo->execute();
+            $this->row = $query_pdo->rowCount();
 
-                if(substr(trim(strtolower($sql)), 0, 6) == 'select'){
-                    $this->dataset = $query_pdo;
+            if(substr(trim(strtolower($sql)), 0, 6) == 'select'){
+                $this->dataset = $query_pdo;
 
-                    return $query_pdo;
-                } else {
-                    return $this->row;
-                }
+                return $query_pdo;
             } else {
-                $this->errorManager(__FILE__, __FUNCTION__, NULL, 'Comando sql nao informado');
+                return $this->row;
             }
-        } else if($this->typedb == 'MYSQL_CONNECT'){
-            if($sql != NULL){
-                $query = mysql_query($sql) or $this->errorManager(__FILE__, __FUNCTION__, NULL, mysql_error());
-                $this->row = mysql_affected_rows($this->conect);
-
-                if(substr(trim(strtolower($sql)), 0, 6) == 'select'){
-                    $this->dataset = $query;
-
-                    return $query;
-                } else {
-                    return $this->row;
-                }
-
-            } else {
-                $this->errorManager(__FILE__, __FUNCTION__, NULL, 'Comando sql nao informado');
-            }
-
+        } else {
+            $this->errorManager(__FILE__, __FUNCTION__, NULL, 'Comando sql nao informado');
         }
     }
 

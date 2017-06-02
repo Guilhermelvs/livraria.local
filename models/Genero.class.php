@@ -23,7 +23,6 @@ class Genero extends ConnectDB
 
         if(sizeof($columns) <= 0){
             $this->columns = array(
-                "nome" => NULL,
                 "descricao" => NULL,
             );
         } else {

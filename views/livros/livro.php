@@ -17,8 +17,8 @@
     		<div class="container">
     			<ol class="breadcrumb">
     				<li><a href="<?php echo URL_BASE; ?>">Home</a></li>
-    				<li><a href="<?php echo URL_BASE; ?>livros/populares?categoria=<?php echo $livro->genero_id; ?>"><?php echo $livro->descricao; ?></a></li>
-    				<li class="active"><?php echo $livro->nome; ?></li>
+    				<li><a href="<?php echo URL_BASE; ?>livros/genero?id=<?php echo $livro->genero_id; ?>"><?php echo utf8_encode($livro->descricao); ?></a></li>
+    				<li class="active"><?php echo utf8_encode($livro->nome); ?></li>
     			</ol>
     			<!-- start content -->
     			<div class="col-md-9 det">
@@ -35,8 +35,8 @@
     				<div class="single-right">
                         <div class="simpleCart_shelfItem">
                             <input type="hidden" value="1" class="item_Quantity">
-        					<div class="id"><h4 class="item_name" style="font-size: 16pt">Título: <?php echo $livro->nome; ?></h4></div>
-        					<div class="id"><h4>ID: <?php echo $livro->livro_id; ?></h4></div>
+        					<div class="id"><h4 class="item_name" style="font-size: 16pt">Título: <?php echo utf8_encode($livro->nome); ?></h4></div>
+        					<div class="id"><h4>Autor: <?php echo $livro->autor; ?></h4></div>
         					<form action="" class="sky-form">
         						<fieldset>
         							<section>
@@ -71,7 +71,7 @@
     				<div class="clearfix"></div>
                     <div class="sofaset-info">
     					<h4>Detalhes </h4>
-                        <p class="prod-desc"><?php echo $livro->detalhes; ?></p>
+                        <p class="prod-desc"><?php echo utf8_encode($livro->detalhes); ?></p>
     				</div>
     			</div>
     			<div class="clearfix"></div>

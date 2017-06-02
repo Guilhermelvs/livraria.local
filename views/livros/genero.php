@@ -6,7 +6,7 @@
             require_once($pathLivro);
             require_once($pathGenero);
 
-            $categoria = $_GET['categoria']; //echo $categoria;
+            $categoria = $_GET['id']; //echo $categoria;
 
             /* Definindo objeto*/
             $genero = new Genero();
@@ -17,7 +17,7 @@
             if($genero->row > 0){
                 $categoria = $genero->dataReturn();
         ?>
-            <h3>Livros > Populares > <?php echo $categoria->descricao; ?></h3>
+            <h3>Livros > Gênero > <?php echo utf8_encode($categoria->descricao); ?></h3>
             <div class="seller-grids">
                 <?php
                     $livros = new Livro();
@@ -30,8 +30,8 @@
                         foreach ($livros_array as $livro) {
                 ?>
                     <div class="col-md-3 seller-grid">
-                        <a href="<?php echo URL_BASE; ?>livros/livro?id=<?php echo $livro['livro_id']; ?>"><img src="<?php echo ww.jpg . '/produtos/' . $livro['livro_id']; ?>.jpg" alt=""/></a>
-                        <h4><a href="<?php echo URL_BASE; ?>livros/livro?id=<?php echo $livro['livro_id']; ?>"><?php echo $livro['nome']; ?></a></h4>
+                        <a href="<?php echo URL_BASE; ?>livros/livro?id=<?php echo $livro['livro_id']; ?>"><img src="<?php echo URL_IMG . '/produtos/' . $livro['livro_id']; ?>.jpg" alt=""/></a>
+                        <h4><a href="<?php echo URL_BASE; ?>livros/livro?id=<?php echo $livro['livro_id']; ?>"><?php echo utf8_encode($livro['nome']); ?></a></h4>
                         <p>R$ <?php echo $livro['valor']; ?></p>
                     </div>
 
@@ -41,10 +41,11 @@
                     } else {
                         $i++;
                     }
-                        } } ?>
+                } } else { ?>
+                    <span class="alert alert-danger">Nenhum Livro localizado</span>
             </div>
-            <?php } else { ?>
-                <span class="alert alert-danger">Nenhuma categoria localizada</span>
+            <?php } } else { ?>
+                <span class="alert alert-danger">Nenhum Gênero localizado</span>
             <?php } ?>
     </div>
 </div>
