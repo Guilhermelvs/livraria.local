@@ -8,12 +8,12 @@
 					 <li><a href="#">Quem somos nós</a></li>
 					 <li><a href="contact.html">Contato</a></li>
 					 <li><a href="#">Nossos Sites</a></li>
+					 <li><a href="#">Nossas lojas</a></li>
 				 </ul>
 			 </div>
 			 <div class="col-md-3 ftr-grid">
-				 <h4>Serviço ao cliente</h4>
+				 <h4>Atendimento ao cliente</h4>
 				 <ul>
-					 <li><a href="#">FAQ</a></li>
 					 <li><a href="#">Envio</a></li>
 					 <li><a href="#">Cancelamento</a></li>
 					 <li><a href="#">Devoluções</a></li>
@@ -27,7 +27,6 @@
 					 <li><a href="account.html">Sua Conta</a></li>
 					 <li><a href="#">Infomações Pessoais</a></li>
 					 <li><a href="#">Endereço</a></li>
-					 <li><a href="#">Desconto</a></li>
 					 <li><a href="#">Acompanhe seu Pedido</a></li>
 				 </ul>
 			 </div>
@@ -57,7 +56,7 @@
 <div class="footer">
 	 <div class="container">
 		 <div class="copywrite">
-			 <p>&copy; Guilherme Lucas. Disciplina: T&oacute;picos Integradores I</a>.</p>
+			 <p>&copy; Guilherme Lucas. Disciplina: Programção para WEB</a>.</p>
 		 </div>
 		 </div>
 	 </div>

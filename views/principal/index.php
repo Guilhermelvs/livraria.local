@@ -14,14 +14,14 @@
 <!---->
 <div class="new">
     <div class="container">
-        <h3>Ofertas Imperdíveis</h3>
+        <h3>Confira as ofertas que estão todos comentando</h3>
         <?php include_once('offers-incredible.php'); ?>
     </div>
 </div>
 <!---->
 <div class="top-sellers">
     <div class="container">
-        <h3>Destaques da semana</h3>
+        <h3>Veja os destaques da semana</h3>
         <div class="seller-grids">
             <div class="col-md-3 seller-grid">
                 <a href="products.html"><img src="<?php echo URL_IMG; ?>hp.jpg" alt=""/></a>
