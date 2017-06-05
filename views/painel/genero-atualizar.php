@@ -1,31 +1,29 @@
-
 <?php
 
 if(
-    isset($_GET['id'])
+    isset($_POST['descricao'])
 ){
-    $id_data = $_GET['id'];
-
     $genero = new Genero();
-    $genero->extraSelect = ' where genero_id = ' . $id_data;
-    $genero->selectDB($genero);
 
-    if($genero->row == 1) {
-        $genero->delete($id_data);
+    $add_data = array(
+        'descricao' => $_POST['descricao']
+    );
+
+    $genero->update($_POST['genero_id'], $add_data);
 ?>
 
 <div class="container">
     <div class="single-sec">
         <div class="alert alert-success" role="alert" id="success_message" style="margin: 25px">
             <p>Sucesso <i class="glyphicon glyphicon-thumbs-up"></i></p>
-            <p>O Gênero foi deletado corretamente!</p>
+            <p>O Gênero foi atualizado corretamente!</p>
             <br />
-            <a href="<?php echo URL_BASE; ?>painel/genero-lista" class="btn btn-warning btn-sm">Voltar para Lista de Gêneros</a>
+            <a href="<?php echo URL_BASE; ?>painel/genero-lista" class="btn btn-warning btn-sm">Finalizar</a>
         </div>
     </div>
 </div>
 
-<?php } } else { ?>
+<?php } else { ?>
 
 <div class="container">
     <div class="single-sec">

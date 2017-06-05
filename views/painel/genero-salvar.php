@@ -9,7 +9,7 @@ if(
         'descricao' => $_POST['descricao']
     );
 
-    $genero->insert($add_data);
+    $genero->update($_POST['genero_id'], $add_data);
 ?>
 
 <div class="container">

@@ -106,7 +106,7 @@ abstract class ConnectDB
 
             next($object->columns);
         }
-        $sql.= "WHERE " . $object->columnPrimaryKey . "=";
+        $sql.= " WHERE " . $object->columnPrimaryKey . "=";
         $sql.= is_numeric($object->valuePrimaryKey) ? $object->valuePrimaryKey : "'" . $object->valuePrimaryKey . "'; ";
 
         if($rquery == false) return $this->executeSql($sql); else return $sql;
@@ -122,10 +122,10 @@ abstract class ConnectDB
     public function deleteDB($object, $rquery=false)
     {
         $sql = 'DELETE FROM ' . $object->table_name;
-        $sql.= "WHERE " . $object->columnPrimaryKey . "=";
+        $sql.= " WHERE " . $object->columnPrimaryKey . "=";
         $sql.= is_numeric($object->valuePrimaryKey) ? $object->valuePrimaryKey : "'" . $object->valuePrimaryKey . "'; ";
 
-        if($rquery == false) return $this->executeSql($sql); else return $sql . $logSql;
+        if($rquery == false) return $this->executeSql($sql); else return $sql;
     }
 
     /**

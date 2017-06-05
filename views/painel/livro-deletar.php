@@ -6,21 +6,21 @@ if(
 ){
     $id_data = $_GET['id'];
 
-    $genero = new Genero();
-    $genero->extraSelect = ' where genero_id = ' . $id_data;
-    $genero->selectDB($genero);
+    $livro = new Livro();
+    $livro->extraSelect = ' where livro_id = ' . $id_data;
+    $livro->selectDB($livro);
 
-    if($genero->row == 1) {
-        $genero->delete($id_data);
+    if($livro->row == 1) {
+        $livro->delete($id_data);
 ?>
 
 <div class="container">
     <div class="single-sec">
         <div class="alert alert-success" role="alert" id="success_message" style="margin: 25px">
             <p>Sucesso <i class="glyphicon glyphicon-thumbs-up"></i></p>
-            <p>O Gênero foi deletado corretamente!</p>
+            <p>O Livro foi deletado corretamente!</p>
             <br />
-            <a href="<?php echo URL_BASE; ?>painel/genero-lista" class="btn btn-warning btn-sm">Voltar para Lista de Gêneros</a>
+            <a href="<?php echo URL_BASE; ?>painel/livro-lista" class="btn btn-warning btn-sm">Voltar para Lista de Livros</a>
         </div>
     </div>
 </div>

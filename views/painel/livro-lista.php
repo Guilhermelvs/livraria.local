@@ -31,8 +31,8 @@
                                 </td>
                                 <td>R$ <?php echo str_replace('.', ',', $livro['valor']); ?></td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    <a href="#" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
+                                    <a href="<?php echo URL_BASE; ?>painel/livro-editar?id=<?php echo $livro['livro_id']; ?>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="<?php echo URL_BASE; ?>painel/livro-deletar?id=<?php echo $livro['livro_id']; ?>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
                                 </td>
                             </tr>
                         <?php } } ?>
