@@ -17,7 +17,7 @@
             else if($passo == 5) echo '<div class="new-items new_last">';
 ?>
             <div class="item<?php echo $i[$passo]; ?>">
-                <a href="<?php echo URL_BASE; ?>livros/livro?id=<?php echo $livro['livro_id']; ?>"><img src="<?php echo URL_IMG . '/produtos/' . $livro['livro_id']; ?>.jpg" style="width: 80%" alt=""/></a>
+                <a href="<?php echo URL_BASE; ?>livros/livro?id=<?php echo $livro['livro_id']; ?>"><img src="<?php echo URL_IMG . '/produtos/' . $livro['livro_id']; ?>.jpg" style="width: 100%" alt=""/></a>
                 <div class="item-info<?php if($passo>1) echo $i[$passo]; ?>">
                     <h4><a href="<?php echo URL_BASE; ?>livros/livro?id=<?php echo $livro['livro_id']; ?>"><?php echo utf8_encode($livro['nome']); ?></a></h4>
                     <span>R$ <?php echo $livro['valor']; ?></span>

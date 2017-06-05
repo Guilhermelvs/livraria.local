@@ -6,17 +6,13 @@
 	$url = $_SERVER['REQUEST_URI'];
 	$prepare = explode('/', $url);
 
-	// posição da url
-	$module_pos = 2;
-	$action_pos = 3;
-
 	// validar
-	if(count($prepare) > $module_pos){
-		if($prepare[$module_pos] != NULL) $module = $prepare[$module_pos]; else $module = 'principal';
+	if(count($prepare) > MODULE_POS){
+		if($prepare[MODULE_POS] != NULL) $module = $prepare[MODULE_POS]; else $module = 'principal';
 
-		if(count($prepare) > $action_pos){
-			if($prepare[$action_pos] != NULL){
-				$prepare_action = explode('?', $prepare[$action_pos]);
+		if(count($prepare) > ACTION_POS){
+			if($prepare[ACTION_POS] != NULL){
+				$prepare_action = explode('?', $prepare[ACTION_POS]);
 
 				$action = $prepare_action[0];
 			} else{

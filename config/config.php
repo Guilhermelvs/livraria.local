@@ -15,3 +15,5 @@ define("DB_NAME", "livraria");
 
 // Page Config Constants
 define("HEAD_TITLE", "Livrarias OTA");
+define("MODULE_POS", 2);
+define("ACTION_POS", 3);

@@ -25,7 +25,7 @@ class Livro extends ConnectDB
             $this->columns = array(
                 "genero_id" => NULL,
                 "nome" => NULL,
-                "descricao" => NULL,
+                "detalhes" => NULL,
                 "valor" => NULL,
             );
         } else {

@@ -31,7 +31,6 @@
                         </div>
                     </div>
                 </li>
-                <li><a class="color5" href="<?php echo URL_BASE; ?>autores">Autores</a></li>
                 <li><a class="color3" href="<?php echo URL_BASE; ?>contato">Contato</a></li>
             </ul>
             <div class="search">
